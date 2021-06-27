@@ -1,4 +1,4 @@
-package one.digitalinnovation.userapi.dto;
+package one.digitalinnovation.userapi.dto.response;
 
 import lombok.Builder;
 import lombok.Data;
