@@ -1,5 +1,6 @@
 package one.digitalinnovation.userapi.service;
 
+import lombok.AllArgsConstructor;
 import one.digitalinnovation.userapi.dto.request.PersonDTO;
 import one.digitalinnovation.userapi.dto.response.MessageResponseDTO;
 import one.digitalinnovation.userapi.entity.Person;
@@ -13,15 +14,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonService {
     private PersonRepository personRepository;
 
     private final PersonMapper personMapper = PersonMapper.INSTANCE;
-
-    @Autowired
-    public PersonService(PersonRepository personRepository) {
-        this.personRepository = personRepository;
-    }
 
     public MessageResponseDTO createPerson( PersonDTO personDTO){
         Person personToSave = personMapper.toModel(personDTO);
@@ -64,10 +61,10 @@ public class PersonService {
                 .orElseThrow(() -> new PersonNotFoundException(id));
     }
 
-    private MessageResponseDTO createMessageResponse(Long id, String s) {
+    private MessageResponseDTO createMessageResponse(Long id, String message) {
         return MessageResponseDTO
                 .builder()
-                .message(s + id)
+                .message(message + id)
                 .build();
     }
 }
